@@ -7,7 +7,7 @@ distributionBase=GRADLE_USER_HOME
 distributionPath=wrapper/dists
 zipStoreBase=GRADLE_USER_HOME
 zipStorePath=wrapper/dists
-distributionUrl=https\://services.gradle.org/distributions/gradle-{version}-all.zip
+distributionUrl=https\://services.gradle.org/distributions/gradle-{version}-{distribution_type}.zip
 """
 
 versions = [
@@ -18,12 +18,16 @@ versions = [
     '3.2.1', '3.3', '3.4', '3.4.1', '3.5', '4.0-milestone-1'
 ]
 
-for version in versions:
-    gradle_wrapper_properties = gradle_wrapper_properties_template.format(version=version)
-    with open('gradle/wrapper/gradle-wrapper.properties', 'w') as fd:
-        fd.write(gradle_wrapper_properties)
+distribution_types = ['bin', 'all']
 
-    print("\n\n== Gradle version %s ==\n\n" % version)
-    return_code = subprocess.call(['./gradlew', 'tasks'])
-    if return_code != 0:
-        raise ValueError("Installing Gradle %s failed" % version)
+for version in versions:
+    for distribution_type in distribution_types:
+        gradle_wrapper_properties = gradle_wrapper_properties_template.format(
+            version=version, distribution_type=distribution_type)
+        with open('gradle/wrapper/gradle-wrapper.properties', 'w') as fd:
+            fd.write(gradle_wrapper_properties)
+
+        print("\n\n== Gradle version %s ==\n\n" % version)
+        return_code = subprocess.call(['./gradlew', 'tasks'])
+        if return_code != 0:
+            raise ValueError("Installing Gradle %s failed" % version)
