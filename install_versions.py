@@ -29,6 +29,7 @@ for version in versions:
             fd.write(gradle_wrapper_properties)
 
         print("\n\n== Gradle version %s ==\n\n" % version)
-        return_code = subprocess.call(['./gradlew', 'tasks'])
+        return_code = subprocess.call(['./gradlew', '--version'])
         if return_code != 0:
             raise ValueError("Installing Gradle %s failed" % version)
+
