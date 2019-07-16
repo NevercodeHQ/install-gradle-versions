@@ -6,7 +6,7 @@ set -x
 ARCHIVE_PATH="/tmp/install-gradles.zip"
 REPO_DIR="install-gradle-versions-master"
 
-wget https://github.com/priitlatt/install-gradle-versions/archive/master.zip -O $ARCHIVE_PATH
+wget https://github.com/NevercodeHQ/install-gradle-versions/archive/master.zip -O $ARCHIVE_PATH
 unzip $ARCHIVE_PATH
 
 CURRENT_DIR=`pwd`
