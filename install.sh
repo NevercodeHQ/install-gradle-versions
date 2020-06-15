@@ -11,7 +11,8 @@ unzip $ARCHIVE_PATH
 
 CURRENT_DIR=`pwd`
 cd $REPO_DIR
-python install_versions.py
+chmod +x install_versions.py
+./install_versions.py
 
 cd $CURRENT_DIR
 rm $ARCHIVE_PATH
